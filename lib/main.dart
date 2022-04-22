@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:learningdart/pages/cart_page.dart';
 import 'package:learningdart/pages/login_page.dart';
-import 'package:learningdart/pages/home_page.dart';
 import 'package:learningdart/utils/routes.dart';
-import 'package:learningdart/widgets/themes.dart';
+import 'pages/home_page.dart';
+import 'widgets/themes.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system,
       theme: MyTheme.lightTheme(context),
-      //darkTheme: MyTheme.darkTheme(context),
-    
-      initialRoute: MyRoutes.homeRoute,
+      darkTheme: MyTheme.darkTheme(context),
+      debugShowCheckedModeBanner: false,
+      initialRoute: MyRoutes.cartRoute,
       routes: {
-        "/":(context) => const LoginPage(),
-        MyRoutes.homeRoute:(context) => const HomePage(),
-        MyRoutes.loginRoute:(context) => const LoginPage()
+        "/": (context) => LoginPage(),
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => CartPage(),
       },
     );
   }
