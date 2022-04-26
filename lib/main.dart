@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:learningdart/core/store.dart';
 import 'package:learningdart/pages/cart_page.dart';
 import 'package:learningdart/pages/login_page.dart';
 import 'package:learningdart/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'pages/home_page.dart';
 import 'widgets/themes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(VxState
+  ( store: MyStore(),
+    child: MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: MyRoutes.cartRoute,
       routes: {
-        "/": (context) => LoginPage(),
+        "/": (context) => HomePage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.cartRoute: (context) => CartPage(),

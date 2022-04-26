@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learningdart/core/store.dart';
+import 'package:learningdart/models/cart.dart';
 import 'dart:convert';
 import 'package:learningdart/models/catalog.dart';
 import 'package:learningdart/utils/routes.dart';
@@ -16,10 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int days = 30;
-
-  final String name = "Codepur";
-
+  final url = "";
   @override
   void initState() {
     super.initState();
@@ -40,15 +39,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
         backgroundColor: context.canvasColor,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-          backgroundColor: context.theme.buttonColor,
-          child: const Icon(
-            CupertinoIcons.cart,
-            color: Colors.white,
-          ),
+        floatingActionButton: VxBuilder(
+          mutations: const {AddMutation, RemoveMutation},
+          builder: (context, _, __) => FloatingActionButton(
+            onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+            backgroundColor: context.theme.buttonColor,
+            child: const Icon(
+              CupertinoIcons.cart,
+              color: Colors.white,
+            ),
+          ).badge(
+              color: Vx.red500,
+              size: 22,
+              count: _cart.items.length,
+              textStyle: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.bold)),
         ),
         body: SafeArea(
           child: Container(
@@ -56,9 +64,9 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 CatalogHeader(),
+                CatalogHeader(),
                 if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-                   CatalogList().py16().expand()
+                  CatalogList().py16().expand()
                 else
                   const CircularProgressIndicator().centered().expand(),
               ],
