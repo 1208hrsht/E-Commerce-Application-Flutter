@@ -8,6 +8,8 @@ import 'add_to_cart.dart';
 import 'catalog_image.dart';
 
 class CatalogList extends StatelessWidget {
+  const CatalogList({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return !context.isMobile?GridView.builder(

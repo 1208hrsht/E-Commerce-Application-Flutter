@@ -13,13 +13,14 @@ import 'package:learningdart/widgets/home_widgets/catalog_list.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final url = "";
-  @override
+   @override
   void initState() {
     super.initState();
     loadData();
@@ -64,9 +65,9 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CatalogHeader(),
+                const CatalogHeader(),
                 if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-                  CatalogList().py16().expand()
+                  const CatalogList().py16().expand()
                 else
                   const CircularProgressIndicator().centered().expand(),
               ],
